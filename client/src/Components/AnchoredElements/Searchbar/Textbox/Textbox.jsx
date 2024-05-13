@@ -14,9 +14,9 @@ const Textbox = () => {
 	return (
 		<form onSubmit={submitHandler}>
 		  <div>
-		    <label>Search</label>
+		    <label>Search </label>
 		    <input type="search" 
-		    	placeholder="please work" 
+		    	placeholder="Search Teams & Players" 
 		    	value={currentText} 
 		    	onChange={(e) => {setCurrentText(e.target.value)}}/>
 		  </div>

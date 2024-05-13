@@ -99,7 +99,6 @@ const TeamView = ({id, name, logo}) => {
 
 	if (statsData)
 	{
-		console.log(statsData);
 		return (
 			<div>
 				<div className='banner'>
