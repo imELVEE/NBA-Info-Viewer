@@ -1,8 +1,9 @@
-import React, {useState, useEffect, useContext} from "react";
-import {SearchContext} from "../FlowController";
+import React, {useState, useEffect, useContext, createContext} from "react";
+import {combinedSearchStatsContext} from "../FlowController";
 import MiniTeam from "../Blurbs/MiniTeam/MiniTeam";
 import MiniPlayer from "../Blurbs/MiniPlayer/MiniPlayer";
 import BlurbsContainer from  "../Blurbs/BlurbsContainer";
+import StatsCard from "../Blurbs/StatsCard/StatsCard";
 import greyed_out from "../../assets/greyed_out.png";
 
 const SearchResults = () => {
@@ -12,8 +13,8 @@ const SearchResults = () => {
 	const [teamsData, setTeamsData] = useState(undefined);
 	const [serverStatus, setServerStatus] = useState('Down');
 
-	const SearchContent = useContext(SearchContext);
-	const query = SearchContent.searching;
+	const CombinedContent = useContext(combinedSearchStatsContext);
+	const query = CombinedContent.searching;
 	
 	useEffect(() => {
 		fetch('http://localhost:5000/search/players/'+query)
@@ -75,6 +76,7 @@ const SearchResults = () => {
 
 	if (playersData && teamsData)
 	{
+		combinedSearchStatsContext.searching = undefined;
 		return (
 			<div>
 				<div>Of Search '{query}' </div>
