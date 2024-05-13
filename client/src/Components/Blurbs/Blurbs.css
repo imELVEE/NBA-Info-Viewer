@@ -1,0 +1,61 @@
+*{
+	marge: 0;
+	padding: 0;
+}
+
+#cardsContainer {
+	display: flex;
+	flex-wrap: nowrap;
+  	overflow-x: auto;
+  	-webkit-overflow-scrolling: touch;
+
+	height: 230px;
+}
+
+.playerCard, .teamCard {
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+	margin-right: 10px;
+	align-items: center;
+
+	img{
+		height: 70%;
+	}
+}
+
+.name {
+
+}
+
+/*
+.playerCard::before, .teamCard::before {
+	position: absolute;
+	content: '';
+	width: 50%;
+	height: 180%;
+	background: fff;
+	transform: rotate(45deg);
+}
+
+.playerCard::hover::before, .teamCard::hover::before{
+	animation: animate2 2s linear infinite;
+}
+
+@keyframes animate2{
+	from{
+		transform: rotate(0deg);
+	}
+	to{
+		transform: rotate(360deg);
+	}
+}
+
+.playerCard::after, .teamCard::after{
+	position: absolute;
+	content: '';
+	inset: 5px;
+	baxkground: 222;
+	border-radius: 8px;
+}
+*/

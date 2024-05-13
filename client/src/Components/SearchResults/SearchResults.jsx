@@ -1,5 +1,9 @@
 import React, {useState, useEffect, useContext} from "react";
 import {SearchContext} from "../FlowController";
+import MiniTeam from "../Blurbs/MiniTeam/MiniTeam";
+import MiniPlayer from "../Blurbs/MiniPlayer/MiniPlayer";
+import BlurbsContainer from  "../Blurbs/BlurbsContainer";
+import greyed_out from "../../assets/greyed_out.png";
 
 const SearchResults = () => {
 	const [isLoadingPlayers, setIsLoadingPlayers] = useState(true);
@@ -17,7 +21,7 @@ const SearchResults = () => {
 				if (response.ok) {
 					setServerStatus('Up');
 					console.log('SERVER IS UP')
-					return response.text();
+					return response.json();
 				}
 				else{
 					setServerStatus('Down');
@@ -52,7 +56,7 @@ const SearchResults = () => {
 		);
 	}
 
-	if (isLoadingPlayers && isLoadingTeams)
+	if (isLoadingPlayers || isLoadingTeams)
 	{
 		return (
 			<div>
@@ -69,19 +73,26 @@ const SearchResults = () => {
 		);
 	}
 
-	return (
-		<div>
-			<div>Of Search '{query}' </div>
-			<h1>
-			PLAYERS THAT MATCHED
-			</h1>
-			{JSON.stringify(playersData)}
-			<h1>
-			TEAMS THAT MATCHED
-			</h1>
-			{JSON.stringify(teamsData)}
-      	</div>
-	);
+	if (playersData && teamsData)
+	{
+		return (
+			<div>
+				<div>Of Search '{query}' </div>
+				<h1>
+				PLAYERS THAT MATCHED
+				</h1>
+				<BlurbsContainer>
+				{playersData["response"].map((player) => (<MiniPlayer key={player.id} id={player.id} firstName={player.firstname} lastName={player.lastname} picture={greyed_out}/>))}
+				</BlurbsContainer>
+				<h1>
+				TEAMS THAT MATCHED
+				</h1>
+				<BlurbsContainer>
+				{teamsData["response"].map((team) => (<MiniTeam key={team.id} id={team.id} name={team.name} logo={team.logo}/>))}
+				</BlurbsContainer>
+	      	</div>
+		);
+	}
 }
 
 export default SearchResults;

@@ -1,5 +1,3 @@
-require("dotenv").config();
-
 const API_KEY = process.env.NBA_RAPIDKEY;
 
 var express = require('express');
