@@ -43,7 +43,7 @@ const SearchResults = () => {
 			.then((data) => {setTeamsData(data);})
 			.catch((response) => {console.log('SERVER MAY BE DOWN');})
 			.finally(() => {setIsLoadingTeams(false);})
-	}, [])
+	}, [query])
 	
 	if (serverStatus === 'Down')
 	{
