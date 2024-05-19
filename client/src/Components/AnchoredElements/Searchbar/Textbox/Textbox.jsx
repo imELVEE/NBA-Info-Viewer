@@ -1,8 +1,8 @@
 import React, {useState, useContext} from "react";
-import {SearchContext} from "../../../FlowController";
+import {SearchAndDataContext} from "../../../FlowController";
 
 const Textbox = () => {
-	const searchContent = useContext(SearchContext)
+	const searchContent = useContext(SearchAndDataContext)
 	const [currentText, setCurrentText] = useState('');
 
 	const submitHandler = (e) => {

@@ -3,7 +3,6 @@ import {combinedSearchStatsContext} from "../FlowController";
 import MiniTeam from "../Blurbs/MiniTeam/MiniTeam";
 import MiniPlayer from "../Blurbs/MiniPlayer/MiniPlayer";
 import BlurbsContainer from  "../Blurbs/BlurbsContainer";
-import StatsCard from "../Blurbs/StatsCard/StatsCard";
 import greyed_out from "../../assets/greyed_out.png";
 
 const SearchResults = () => {

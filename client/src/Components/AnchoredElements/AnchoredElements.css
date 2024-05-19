@@ -1,0 +1,49 @@
+.TopBar {
+	display: flex;
+	justify-content: space-between;
+	margin-top: 5px;
+}
+
+.SignIn {
+	margin-right: 10px;
+
+	* > .DisplayButton{
+		width: 100px;
+		height: 30px;
+		border-width: 3px;
+		border-color: black;
+	}
+}
+
+.SignOut {
+	display: flex;
+	justify-content: space-between;
+	width: auto;
+}
+.SignOutButton {
+	margin-right: 10px;
+	margin-left: 5px;
+}
+
+.EmailDialog {
+	width: 285px;
+	height: 70px;
+
+	& > .CloseButton{
+		width: 25px;
+		height: 25px;
+	}
+
+	
+	& > form {
+		align-self: flex-end;
+		margin-top: 10px;
+		margin-bottom: 10px;
+		margin-left: 10px;
+
+		button{
+			margin-left: 15px;
+		}
+	}
+	
+}
