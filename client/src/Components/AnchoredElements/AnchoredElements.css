@@ -47,3 +47,10 @@
 	}
 	
 }
+
+.Searchbar {
+	display: flex;
+	align-items: flex-end;
+	justify-content: space-between;
+	width: 200px;
+}

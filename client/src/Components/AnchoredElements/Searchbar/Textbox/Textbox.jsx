@@ -1,5 +1,6 @@
 import React, {useState, useContext} from "react";
 import {SearchAndDataContext} from "../../../FlowController";
+import home_icon from '../../../../assets/home_icon.jpg';
 
 const Textbox = () => {
 	const searchContent = useContext(SearchAndDataContext)
@@ -11,10 +12,21 @@ const Textbox = () => {
 		setCurrentText('');
 	}
 
+	const returnHome = () => {
+		searchContent.setViewingStatsOf(undefined);
+		searchContent.setSearching(undefined);
+	}
+
 	return (
-		<form onSubmit={submitHandler}>
+		<form onSubmit={submitHandler} className="Searchbar">
+			<button onClick={returnHome}>
+		    	<img
+		    	src={home_icon}
+		    	width='30px'
+		    	alt='Home'
+		    	/>
+	    	</button>
 		  <div>
-		    <label>Search </label>
 		    <input type="search" 
 		    	placeholder="Search Teams & Players" 
 		    	value={currentText} 

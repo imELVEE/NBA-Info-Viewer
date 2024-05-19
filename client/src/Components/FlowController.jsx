@@ -10,7 +10,7 @@ export const combinedSearchStatsContext = createContext(undefined);
 
 const FlowController = () => {
   const [searching, setSearching] = useState(undefined);
-  const [viewingStatsOf, setViewingStatsOf] = useState(false);
+  const [viewingStatsOf, setViewingStatsOf] = useState(undefined);
   const [userData, setUserData] = useState(undefined);
 
   console.log(`from flowcontrller data: ${JSON.stringify(userData)}`);
@@ -19,7 +19,7 @@ const FlowController = () => {
   {
     return (
       <div>
-        <SearchAndDataContext.Provider value={{searching, setSearching, userData, setUserData}}>
+        <SearchAndDataContext.Provider value={{searching, setSearching, userData, setUserData, viewingStatsOf, setViewingStatsOf}}>
           <AnchoredElements />
         </SearchAndDataContext.Provider>
         <div>
@@ -35,7 +35,7 @@ const FlowController = () => {
   {
     return (
       <div>
-        <SearchAndDataContext.Provider value={{searching, setSearching, userData, setUserData}}>
+        <SearchAndDataContext.Provider value={{searching, setSearching, userData, setUserData,  viewingStatsOf, setViewingStatsOf}}>
           <AnchoredElements />
         </SearchAndDataContext.Provider>
         <div>
@@ -49,7 +49,7 @@ const FlowController = () => {
 
   return (
     <div>
-      <SearchAndDataContext.Provider value={{searching, setSearching, userData, setUserData}}>
+      <SearchAndDataContext.Provider value={{searching, setSearching, userData, setUserData,  viewingStatsOf, setViewingStatsOf}}>
         <AnchoredElements />
       </SearchAndDataContext.Provider>
       <div>
