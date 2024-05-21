@@ -9,13 +9,13 @@
   	overflow-x: auto;
   	-webkit-overflow-scrolling: touch;
 
-	height: 230px;
+	height: 235px;
 }
 
 .playerCard, .teamCard {
 	display: flex;
 	flex-direction: column;
-	height: 98%;
+	height: 97%;
 	width: 180px;
 	margin-right: 10px;
 	align-items: center;

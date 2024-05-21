@@ -10,7 +10,7 @@ router.get('/teams/:TEAMSARRAY', async function(req, res, next) {
   let fetched_data = {
     'teams': teams_data,
   }
-  console.log(JSON.stringify(fetched_data));
+  //console.log(JSON.stringify(fetched_data));
   res.send(fetched_data);
 })
 
@@ -21,7 +21,7 @@ router.get('/players/:PLAYERSARRAY', async function(req, res, next) {
   let fetched_data = {
     'players': players_data
   }
-  console.log(JSON.stringify(fetched_data));
+  //console.log(JSON.stringify(fetched_data));
   res.send(fetched_data);
 })
 

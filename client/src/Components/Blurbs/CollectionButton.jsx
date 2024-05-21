@@ -36,6 +36,11 @@ const CollectionButton = ({id, data, team, setData}) => {
 		}
 	}, [id, data, team])
 
+	const doNothing = (e) => {
+		e.preventDefault();
+		e.stopPropagation();
+	}
+
 	const removeFromCollection = (e) => {
 		e.preventDefault();
 		e.stopPropagation();
@@ -103,6 +108,15 @@ const CollectionButton = ({id, data, team, setData}) => {
 				.then((response) => {setData(response);})
 				.catch((response) => {console.log('SERVER MAY BE DOWN');})
 		}
+	}
+
+	if (!data)
+	{
+		return(
+			<button onClick={doNothing}>
+				NOT SIGNED IN
+			</button>
+		);
 	}
 
 	//give button

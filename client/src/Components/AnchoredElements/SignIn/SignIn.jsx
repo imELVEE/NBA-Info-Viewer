@@ -3,7 +3,6 @@ import SignInDialog from './SignInDialog/SignInDialog';
 import {SearchAndDataContext} from '../../FlowController';
 
 const SignIn = () => {
-	const [serverStatus, setServerStatus] = useState('Down');
 
 	const [userEmail, setUserEmail] = useState(undefined);
 	const [isSignedIn, setSignedIn] = useState(false);
@@ -20,17 +19,14 @@ const SignIn = () => {
 			fetch('http://localhost:5000/users/sign-in/' + userEmail)
 				.then((response) => {
 					if (response.ok) {
-						setServerStatus('Up');
-						console.log('SERVER IS UP')
 						return response.json();
 					}
 					else{
-						setServerStatus('Down');
 						return Promise.reject(response);
 					}
 				})
 				.then((data) => {
-					console.log(`from signing in: ${JSON.stringify(data)}`);
+					//console.log(`from signing in: ${JSON.stringify(data)}`);
 					dataContext.setUserData(data);
 				})
 				.catch((response) => {setSignedIn(false);

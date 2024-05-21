@@ -1,4 +1,4 @@
-import React, {useEffect, useState, createContext} from "react";
+import React, {useState, createContext} from "react";
 import AnchoredElements from "./AnchoredElements/AnchoredElements";
 import SearchResults from "./SearchResults/SearchResults";
 import TeamView from "./StatViews/FullTeam/TeamView";

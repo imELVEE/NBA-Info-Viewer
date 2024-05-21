@@ -1,4 +1,4 @@
-const MONGO_KEY = process.env.MONGO_URI;
+const MONGO_KEY = process.env.MONGO_ANYWHERE_USER;
 const User = require('./models/User');
 
 var express = require('express');
@@ -12,26 +12,17 @@ const clientOptions = {
   serverApi: { version: '1', strict: true, deprecationErrors: true } 
 };
 
-/*
-async function run() {
-  try {
-    // Create a Mongoose client with a MongoClientOptions object to set the Stable API version
-    await mongoose.connect(uri, clientOptions);
-    await mongoose.connection.db.admin().command({ ping: 1 });
-    console.log("Pinged your deployment. You successfully connected to MongoDB!");
-  } finally {
-    // Ensures that the client will close when you finish/error
-    await mongoose.disconnect();
-  }
-}
-*/
+var connected = 0;
 
 router.get('/sign-in/:EMAIL', async function(req, res, next) {
   try {
+
     await mongoose.connect(uri, clientOptions);
     await mongoose.connection.db.admin().command({ ping: 1 });
 
     console.log("Pinged your deployment. You successfully connected to MongoDB!");
+    
+    connected++;
     const userExists = await User.exists({email: req.params.EMAIL});
 
     if (userExists)
@@ -45,18 +36,26 @@ router.get('/sign-in/:EMAIL', async function(req, res, next) {
       const data = await User.findOne({email: req.params.EMAIL});
       res.send(data);
     }
+
+    connected--;
   }
   finally {
-    await mongoose.disconnect();
+    if (connected.length === 0)
+    {
+      await mongoose.disconnect();
+    }
   }
 });
 
 router.get('/add/team/:TEAMID/:USERID', async function(req, res, next) {
-   try {
+  try {
+
     await mongoose.connect(uri, clientOptions);
     await mongoose.connection.db.admin().command({ ping: 1 });
 
     console.log("Pinged your deployment. You successfully connected to MongoDB!");
+    
+    connected++;
     const updatedUser = await User.findByIdAndUpdate(
                                                     req.params.USERID,
                                                     {$push: {teams: req.params.TEAMID}},
@@ -65,18 +64,25 @@ router.get('/add/team/:TEAMID/:USERID', async function(req, res, next) {
                                                     );
 
     res.send(updatedUser);
+    connected--;
   }
   finally {
-    await mongoose.disconnect();
+    if (connected.length === 0)
+    {
+      await mongoose.disconnect();
+    }
   }
 });
 
 router.get('/add/player/:PLAYERID/:USERID', async function(req, res, next) {
   try {
+ 
     await mongoose.connect(uri, clientOptions);
     await mongoose.connection.db.admin().command({ ping: 1 });
 
     console.log("Pinged your deployment. You successfully connected to MongoDB!");
+    
+    connected++;
     const updatedUser = await User.findByIdAndUpdate(
                                                     req.params.USERID,
                                                     {$push: {players: req.params.PLAYERID}},
@@ -85,18 +91,25 @@ router.get('/add/player/:PLAYERID/:USERID', async function(req, res, next) {
                                                     );
 
     res.send(updatedUser);
+    connected--;
   }
   finally {
-    await mongoose.disconnect();
+    if (connected.length === 0)
+    {
+      await mongoose.disconnect();
+    }
   }
 });
 
 router.get('/remove/team/:TEAMID/:USERID', async function(req, res, next) {
   try {
+
     await mongoose.connect(uri, clientOptions);
     await mongoose.connection.db.admin().command({ ping: 1 });
 
     console.log("Pinged your deployment. You successfully connected to MongoDB!");
+    
+    connected++;
     const updatedUser = await User.findByIdAndUpdate(
                                                     req.params.USERID,
                                                     {$pull: {teams: req.params.TEAMID}},
@@ -105,18 +118,25 @@ router.get('/remove/team/:TEAMID/:USERID', async function(req, res, next) {
                                                     );
 
     res.send(updatedUser);
+    connected--;
   }
   finally {
-    await mongoose.disconnect();
+    if (connected.length === 0)
+    {
+      await mongoose.disconnect();
+    }
   }
 });
 
 router.get('/remove/player/:PLAYERID/:USERID', async function(req, res, next) {
   try {
+
     await mongoose.connect(uri, clientOptions);
     await mongoose.connection.db.admin().command({ ping: 1 });
 
     console.log("Pinged your deployment. You successfully connected to MongoDB!");
+    
+    connected++;
     const updatedUser = await User.findByIdAndUpdate(
                                                     req.params.USERID,
                                                     {$pull: {players: req.params.PLAYERID}},
@@ -125,9 +145,13 @@ router.get('/remove/player/:PLAYERID/:USERID', async function(req, res, next) {
                                                     );
 
     res.send(updatedUser);
+    connected--;
   }
   finally {
-    await mongoose.disconnect();
+    if (connected.length === 0)
+    {
+      await mongoose.disconnect();
+    }
   }
 });
 
