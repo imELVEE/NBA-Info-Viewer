@@ -1,9 +1,10 @@
 import React, {useContext} from 'react';
 import '../Blurbs.css';
+import CollectionButton from '../CollectionButton';
 
 import {combinedSearchStatsContext} from "../../FlowController";
 
-const MiniTeam = ({id, name, logo}) => {
+const MiniTeam = ({id, name, logo, userData, setUserData}) => {
 	const TeamStatsViewInfo = useContext(combinedSearchStatsContext);
 
 	const initiateTeamView = () => {
@@ -11,15 +12,20 @@ const MiniTeam = ({id, name, logo}) => {
 		TeamStatsViewInfo.setViewingStatsOf([id, name, logo]);
 	}
 
+	//console.log(`MiniTeam: ${JSON.stringify(userData)}`);
+
 	return (
 		<div className='teamCard' onClick={initiateTeamView}>
 			<img
 			src={logo}
 			alt='Team Logo'
 			/>
-			<h4 className='name'>
-			{name}
-			</h4>
+			<div className="descript">
+				<h4 className='name'>
+				{name}
+				</h4>
+				<CollectionButton id={id} data={userData} team={true} setData={setUserData}/>
+			</div>
 		</div>
 	);
 }

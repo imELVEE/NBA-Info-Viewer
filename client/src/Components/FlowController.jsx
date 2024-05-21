@@ -13,8 +13,6 @@ const FlowController = () => {
   const [viewingStatsOf, setViewingStatsOf] = useState(undefined);
   const [userData, setUserData] = useState(undefined);
 
-  console.log(`from flowcontrller data: ${JSON.stringify(userData)}`);
-
   if (searching)
   {
     return (
@@ -24,7 +22,7 @@ const FlowController = () => {
         </SearchAndDataContext.Provider>
         <div>
         <combinedSearchStatsContext.Provider value={{searching, setSearching, viewingStatsOf, setViewingStatsOf}}>
-          <SearchResults />
+          <SearchResults userData={userData} setUserData={setUserData}/>
         </combinedSearchStatsContext.Provider>
         </div>
       </div>
@@ -54,7 +52,7 @@ const FlowController = () => {
       </SearchAndDataContext.Provider>
       <div>
         <combinedSearchStatsContext.Provider value={{searching, setSearching, viewingStatsOf, setViewingStatsOf}}>
-          <Homepage data={userData}/>
+          <Homepage userData={userData} setUserData={setUserData}/>
         </combinedSearchStatsContext.Provider>
       </div>
     </div>

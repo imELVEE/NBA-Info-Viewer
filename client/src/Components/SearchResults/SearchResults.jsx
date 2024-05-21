@@ -5,7 +5,7 @@ import MiniPlayer from "../Blurbs/MiniPlayer/MiniPlayer";
 import BlurbsContainer from  "../Blurbs/BlurbsContainer";
 import greyed_out from "../../assets/greyed_out.png";
 
-const SearchResults = () => {
+const SearchResults = ({userData, setUserData}) => {
 	const [isLoadingPlayers, setIsLoadingPlayers] = useState(true);
 	const [isLoadingTeams, setIsLoadingTeams] = useState(true);
 	const [playersData, setPlayersData] = useState(undefined);
@@ -15,12 +15,14 @@ const SearchResults = () => {
 	const CombinedContent = useContext(combinedSearchStatsContext);
 	const query = CombinedContent.searching;
 	
+	//console.log(`search results: ${JSON.stringify(userData)}`);
+
 	useEffect(() => {
 		fetch('http://localhost:5000/search/players/'+query)
 			.then((response) => {
 				if (response.ok) {
 					setServerStatus('Up');
-					console.log('SERVER IS UP')
+					//console.log('SERVER IS UP')
 					return response.json();
 				}
 				else{
@@ -36,7 +38,7 @@ const SearchResults = () => {
 			.then((response) => {
 				if (response.ok) {
 					setServerStatus('Up');
-					console.log('SERVER IS UP')
+					//console.log('SERVER IS UP')
 					return response.json();
 				}
 				else{
@@ -48,11 +50,18 @@ const SearchResults = () => {
 			.catch((response) => {console.log('SERVER MAY BE DOWN');})
 			.finally(() => {setIsLoadingTeams(false);})
 	}, [query])
+
+	if (serverStatus === 'Down' && !isLoadingTeams && !isLoadingPlayers)
+	{
+		return (
+			<div> Server Down </div>
+		);
+	}
 	
 	if (serverStatus === 'Down')
 	{
 		return (
-			<div> Server Down </div>
+			<div> LOADING </div>
 		);
 	}
 
@@ -83,13 +92,13 @@ const SearchResults = () => {
 				PLAYERS THAT MATCHED
 				</h1>
 				<BlurbsContainer>
-				{playersData["response"].map((player) => (<MiniPlayer key={player.id} id={player.id} firstName={player.firstname} lastName={player.lastname} picture={greyed_out}/>))}
+				{playersData["response"].map((player) => (<MiniPlayer key={player.id} id={player.id} firstName={player.firstname} lastName={player.lastname} picture={greyed_out} userData={userData} setUserData={setUserData}/>))}
 				</BlurbsContainer>
 				<h1>
 				TEAMS THAT MATCHED
 				</h1>
 				<BlurbsContainer>
-				{teamsData["response"].map((team) => (<MiniTeam key={team.id} id={team.id} name={team.name} logo={team.logo}/>))}
+				{teamsData["response"].map((team) => (<MiniTeam key={team.id} id={team.id} name={team.name} logo={team.logo} userData={userData} setUserData={setUserData}/>))}
 				</BlurbsContainer>
 	      	</div>
 		);
